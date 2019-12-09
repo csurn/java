@@ -1,32 +1,24 @@
 package com.example.demo.domain;
 
+import lombok.Data;
+import org.hibernate.annotations.RowId;
+
 import javax.persistence.*;
 import java.util.UUID;
 
 @MappedSuperclass
+@Data
 public class BaseEntity {
     @Id
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String id;
-    private String rowVersion;
 
-    public BaseEntity(){
-        this.id= UUID.randomUUID().toString();
-    }
+    @Column(nullable = false)
+    @GeneratedValue
+    @Version
+    private int rowVersion;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRowVersion() {
-        return rowVersion;
-    }
-
-    public void setRowVersion(String rowVersion) {
-        this.rowVersion = rowVersion;
+    public BaseEntity() {
+        this.id = UUID.randomUUID().toString();
     }
 }

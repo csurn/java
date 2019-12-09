@@ -1,6 +1,6 @@
 package com.example.demo.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +12,12 @@ import java.util.List;
 @Entity
 public class User extends BaseEntity {
     private String userName;
-    private String Password;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    private String password;
+    public User(String userName,String password)
+    {
+       this.userName=userName;
+       this.password=password;
+    }
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<UserRole> userRole = new ArrayList<>();
 }

@@ -12,6 +12,6 @@ import java.util.List;
 @Entity
 public class Permission extends BaseEntity {
     private String name;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "permission",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<RolePermission> rolePermissions = new ArrayList<>();
 }

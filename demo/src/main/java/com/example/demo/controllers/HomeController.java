@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
 
+import io.ebean.DB;
+import io.ebean.Database;
 
 @RestController
 public class HomeController {
-    @Autowired
-    private EbeanServer server;
+
 
     @RequestMapping("/")
-    public String greeting() {
-
-        return new User("","").getUserName();//server.find(User.class).where().isNotNull("userName").findList();
+    public List<User> greeting() {
+        List<User> list =  DB.getDefault().createQuery(User.class).fetch("userRoles").where().isNotNull("userName").findList();
+        return list;
     }
 
     @RequestMapping("/add")
     public User greeting(String userName,String password) {
         User user = new User(userName,password);
-        server.save(user);
+        DB.save(user);
         return user;
     }
 }

@@ -19,5 +19,5 @@ public class User extends BaseEntity {
        this.password=password;
     }
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserRole> userRole = new ArrayList<>();
+    private List<UserRole> userRoles = new ArrayList<>();
 }

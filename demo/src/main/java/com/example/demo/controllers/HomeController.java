@@ -19,10 +19,9 @@ import io.ebean.Database;
 @RestController
 public class HomeController {
 
-
     @RequestMapping("/")
     public List<User> index() {
-        List<User> list = DB.getDefault().createQuery(User.class).fetch("userRoles").where().isNotNull("userName").findList();
+        List<User> list = DB.getDefault().createQuery(User.class).fetch("userRoles").findList();
         return list;
     }
 

@@ -7,6 +7,7 @@ import org.hibernate.annotations.RowId;
 import javax.persistence.*;
 import java.util.UUID;
 
+@Data
 @MappedSuperclass
 public class BaseEntity {
     @Id

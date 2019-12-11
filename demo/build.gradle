@@ -37,3 +37,11 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+//复制资源文件到jar包外，实现优先使用jar包外配置和静态文件的功能，jar包外文件如果删除，则使用jar包内文件
+task copy(type: Copy) {
+    from('src/main/resources')
+    into 'build/libs'
+}
+
+build.dependsOn(copy)

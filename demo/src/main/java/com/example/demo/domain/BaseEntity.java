@@ -1,8 +1,6 @@
 package com.example.demo.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.RowId;
 
 import javax.persistence.*;
 import java.util.UUID;

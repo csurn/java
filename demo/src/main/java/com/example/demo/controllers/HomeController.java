@@ -1,44 +1,45 @@
 package com.example.demo.controllers;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.example.demo.domain.User;
-import io.ebean.BeanState;
-import io.ebean.EbeanServer;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
-import io.ebean.DB;
-import io.ebean.Database;
-
-@RestController
+@Controller
 public class HomeController {
 
     @RequestMapping("/")
-    public List<User> index() {
-        List<User> list = DB.getDefault().createQuery(User.class).fetch("userRoles").findList();
-        return list;
+    public ResponseEntity<String> index() {
+        String fileName = "static/index.html";
+        HttpHeaders responseHeaders = new HttpHeaders();
+        String content = null;
+        responseHeaders.setContentType(MediaType.TEXT_HTML);
+        try {
+            File file = new File(fileName);
+            Resource resource = null;
+            if (file.exists()) {
+                resource = new FileSystemResource(file);
+            } else {
+                resource = new ClassPathResource(fileName);
+            }
+            byte[] data = FileCopyUtils.copyToByteArray(resource.getInputStream());
+            content = new String(data, StandardCharsets.UTF_8);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            content = e.getMessage();
+        }
+        return new ResponseEntity<String>(content, responseHeaders, HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping("/add")
-    public User add(User user) {
-        BeanState state = DB.getDefault().getBeanState(user);
-        if (state.isNew()) {
-            DB.getDefault().save(user);
-        }
-        return user;
-    }
-    @RequestMapping("/edit")
-    public User edit(User user) {
-        BeanState state = DB.getDefault().getBeanState(user);
-        if (state.isDirty()) {
-            DB.getDefault().save(user);
-        }
-        return user;
-    }
 }

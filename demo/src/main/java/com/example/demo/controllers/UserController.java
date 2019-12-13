@@ -3,19 +3,22 @@ package com.example.demo.controllers;
 import com.example.demo.domain.*;
 import io.ebean.BeanState;
 import io.ebean.DB;
+import io.ebean.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 public class UserController {
     @RequestMapping("/users")
     public List<User> users() {
-        User user = new User();user.setUserName("admin");
-        Role role = new Role();role.setName("Radmin");
-        Permission permission = new Permission();permission.setName("Padmin");
+        String name = DB.byName("sqlite").getName();
+        User user = new User();
+        user.setUserName("admin");
+        Role role = new Role();
+        role.setName("Radmin");
+        Permission permission = new Permission();
+        permission.setName("Padmin");
 
         UserRole userRole = new UserRole();
         userRole.setUserId(user.getId());

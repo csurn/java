@@ -31,7 +31,10 @@ public class UserController {
         role.getRolePermissions().add(rolePermission);
 
         DB.getDefault().save(user);
-        List<User> list = DB.getDefault().createQuery(User.class).findList();
+        List<User> list = DB.getDefault().createQuery(User.class)
+                .fetch("userRoles")
+                .fetch("userRoles.role")
+                .findList();
         return list;
     }
 

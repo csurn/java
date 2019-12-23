@@ -1,11 +1,8 @@
 package com.example.demo.domain;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.UUID;
 
-@Data
 @MappedSuperclass
 public class BaseEntity {
     @Id
@@ -19,5 +16,21 @@ public class BaseEntity {
 
     public BaseEntity() {
         this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getRowVersion() {
+        return rowVersion;
+    }
+
+    public void setRowVersion(int rowVersion) {
+        this.rowVersion = rowVersion;
     }
 }

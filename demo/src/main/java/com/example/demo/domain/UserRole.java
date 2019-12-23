@@ -1,11 +1,8 @@
 package com.example.demo.domain;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames={"userId","roleId"})})
-@Data
 @Entity
 public class UserRole extends BaseEntity {
     @Column(name = "userId", updatable = false, insertable = false)
@@ -18,4 +15,36 @@ public class UserRole extends BaseEntity {
     @JoinColumn(name = "roleId")
     @ManyToOne(targetEntity = Role.class)
     private Role role;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

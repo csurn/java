@@ -32,14 +32,14 @@ public class DataBaseSeed {
         em.persist(permission);
 
         UserRole userRole = new UserRole();
-        userRole.setUserId(user.getId());
-        userRole.setRoleId(role.getId());
+        userRole.setUser(user);
+        userRole.setRole(role);
         user.getUserRoles().add(userRole);
         em.persist(userRole);
 
         RolePermission rolePermission = new RolePermission();
-        rolePermission.setRoleId(role.getId());
-        rolePermission.setPermissionId(permission.getId());
+        rolePermission.setRole(role);
+        rolePermission.setPermission(permission);
         role.getRolePermissions().add(rolePermission);
         em.persist(rolePermission);
 

@@ -19,7 +19,7 @@ public class UserController {
     public Iterable<User> users(@RequestParam(defaultValue = "0")int page,
                                 @RequestParam(defaultValue = "10") int size) {
 
-        Iterable<User> list = this.userRepository.search("select u from User u",page,size);
+        Iterable<User> list = this.userRepository.search("from User",page,size);
         return list;
     }
 

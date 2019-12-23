@@ -1,4 +1,4 @@
-package com.example.demo;
+package demo;
 
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;

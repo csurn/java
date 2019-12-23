@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package demo.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Permission extends BaseEntity {
+public class Role extends BaseEntity{
     private String name;
-    @OneToMany(mappedBy = "permission",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<UserRole> userRoles = new ArrayList<>();
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<RolePermission> rolePermissions = new ArrayList<>();
 
     public String getName() {
@@ -18,6 +20,14 @@ public class Permission extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public List<RolePermission> getRolePermissions() {

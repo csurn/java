@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package demo.domain;
 
 import javax.persistence.*;
 import java.util.UUID;

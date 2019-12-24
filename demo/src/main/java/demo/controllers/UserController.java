@@ -19,7 +19,12 @@ public class UserController {
     public Iterable<User> users(@RequestParam(defaultValue = "0")int page,
                                 @RequestParam(defaultValue = "10") int size) {
 
-        Iterable<User> list = this.userRepository.search("from User",page,size);
+        var jpql = "from User as u";
+        jpql+=" inner join fetch u.userRoles as ur";
+        jpql+=" inner join fetch ur.role as r";
+        jpql+=" inner join fetch r.rolePermissions as rp";
+        jpql+=" inner join fetch rp.permission";
+        Iterable<User> list = this.userRepository.search(jpql,page,size);
         return list;
     }
 

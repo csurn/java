@@ -1,9 +1,14 @@
 package demo.domain;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User extends BaseEntity {
@@ -14,7 +19,7 @@ public class User extends BaseEntity {
     private String password;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserRole> userRoles = new ArrayList<>();
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public String getUserName() {
         return userName;
@@ -32,11 +37,11 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public List<UserRole> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(List<UserRole> userRoles) {
+    public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
 }

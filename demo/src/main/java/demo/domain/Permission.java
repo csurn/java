@@ -1,16 +1,19 @@
 package demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Permission extends BaseEntity {
     private String name;
+    @JsonBackReference
     @OneToMany(mappedBy = "permission",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<RolePermission> rolePermissions = new ArrayList<>();
+    private Set<RolePermission> rolePermissions = new HashSet<>();
 
     public String getName() {
         return name;
@@ -20,11 +23,11 @@ public class Permission extends BaseEntity {
         this.name = name;
     }
 
-    public List<RolePermission> getRolePermissions() {
+    public Set<RolePermission> getRolePermissions() {
         return rolePermissions;
     }
 
-    public void setRolePermissions(List<RolePermission> rolePermissions) {
+    public void setRolePermissions(Set<RolePermission> rolePermissions) {
         this.rolePermissions = rolePermissions;
     }
 }

@@ -1,18 +1,22 @@
 package demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Role extends BaseEntity{
     private String name;
+    @JsonBackReference
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<UserRole> userRoles = new ArrayList<>();
+    private Set<UserRole> userRoles = new HashSet<>();
+
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<RolePermission> rolePermissions = new ArrayList<>();
+    private Set<RolePermission> rolePermissions = new HashSet<>();
 
     public String getName() {
         return name;
@@ -22,19 +26,19 @@ public class Role extends BaseEntity{
         this.name = name;
     }
 
-    public List<UserRole> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(List<UserRole> userRoles) {
+    public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
 
-    public List<RolePermission> getRolePermissions() {
+    public Set<RolePermission> getRolePermissions() {
         return rolePermissions;
     }
 
-    public void setRolePermissions(List<RolePermission> rolePermissions) {
+    public void setRolePermissions(Set<RolePermission> rolePermissions) {
         this.rolePermissions = rolePermissions;
     }
 }

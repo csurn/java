@@ -1,5 +1,7 @@
 package demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames={"roleId","permissionId"})})
@@ -9,9 +11,12 @@ public class RolePermission extends BaseEntity {
     private String roleId;
     @Column(name = "permissionId", updatable = false, insertable = false)
     private String permissionId;
+
+    @JsonBackReference
     @JoinColumn(name = "roleId")
     @ManyToOne(targetEntity = Role.class)
     private Role role;
+
     @JoinColumn(name = "permissionId")
     @ManyToOne(targetEntity = Permission.class)
     private Permission permission;

@@ -1,5 +1,6 @@
-package demo.controllers;
+package demo;
 
+import demo.UserRepository;
 import demo.domain.User;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;

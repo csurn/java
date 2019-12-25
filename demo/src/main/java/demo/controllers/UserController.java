@@ -1,5 +1,6 @@
 package demo.controllers;
 
+import demo.UserRepository;
 import demo.domain.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

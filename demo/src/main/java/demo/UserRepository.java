@@ -1,4 +1,4 @@
-package demo.controllers;
+package demo;
 
 import demo.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

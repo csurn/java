@@ -4,7 +4,7 @@ server:
 
 logging:
   level:
-    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway: TRACE
     org.springframework.http.server.reactive: DEBUG
     org.springframework.web.reactive: DEBUG
     reactor.ipc.netty: DEBUG
@@ -13,16 +13,24 @@ logging:
 spring:
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedHeaders: "*"
-            allowedMethods: "*"
+      #globalcors:
+      #corsConfigurations:
+      #'[/**]':
+      #allowedOrigins: "*"
+      #allowedHeaders: "*"
+      #allowedMethods: "*"
       routes:
-        -id: UserCenter
-        uri: http://localhost:8010/
-        predicates:
-        - Path=/UserCenter/**
+        - id: UserCenter
+          uri: http://localhost:8010/
+          predicates:
+            - Path=/UserCenter/**
+          filters:
+            - StripPrefix=1
+        - id: IoTCenter
+          uri: http://localhost:8011/
+          predicates:
+            - Path=/IoTCenter/**
+          filters:
+            - StripPrefix=1
 
-management.endpoints.web.exposure.include: '*'
+#management.endpoints.web.exposure.include: '*'

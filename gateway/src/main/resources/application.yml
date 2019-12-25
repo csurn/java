@@ -1,0 +1,28 @@
+#https://github.com/spencergibb/spring-cloud-gateway-bench
+server:
+  port: 80
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG
+    reactor.netty: DEBUG
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      routes:
+        -id: UserCenter
+        uri: http://localhost:8010/
+        predicates:
+        - Path=/UserCenter/**
+
+management.endpoints.web.exposure.include: '*'

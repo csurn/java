@@ -32,5 +32,12 @@ spring:
             - Path=/IoTCenter/**
           filters:
             - StripPrefix=1
+        - id: IoTCenterWebSocket
+          uri: ws://localhost:8011/
+          predicates:
+            - Path=/IoTCenter/**
+            - Header=Upgrade,websocket
+          filters:
+            - StripPrefix=1
 
 #management.endpoints.web.exposure.include: '*'

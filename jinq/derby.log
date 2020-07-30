@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Jul 30 08:35:28 CST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0173-9d25-33cc-00000f4ae908 
+on database directory memory:D:\Desktop\Jinq\sample\demoDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2437c6dc 
+Loaded from file:/C:/Users/WG/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.3+12-LTS
+user.dir=D:\Desktop\Jinq\sample
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
